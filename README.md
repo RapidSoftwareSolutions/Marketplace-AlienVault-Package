@@ -36,14 +36,14 @@ Indicator page api for IPv4 Addresses.
 |--------|------------|----------
 | apiKey | credentials| Your API key.
 | ip     | String     | Example -  8.8.8.8 ;
-| section| Select     | Section name (one of general, reputation, geo, malware, url_list, passive_dns).
+| section| Select     | Section name (one of general, reputation, geo, malware, urlList, passiveDns).
 
 1. general: General information about the IP, such as geo data, and a list of the other sections currently available for this IP address.
 2.  reputation: OTX data on malicious activity observed by AlienVault Labs (IP Reputation).
 3.  geo: A more verbose listing of geographic data (Country code, coordinates, etc.)
 4. malware: Malware samples analyzed by AlienVault Labs which have been observed connecting to this IP address.
-5. url_list: URLs analyzed by AlienVault Labs which point to or are somehow associated with this IP address.
-6. passive_dns: passive dns information about hostnames/domains observed by AlienVault Labs pointing to this IP address.
+5. urlList: URLs analyzed by AlienVault Labs which point to or are somehow associated with this IP address.
+6. passiveDns: passive dns information about hostnames/domains observed by AlienVault Labs pointing to this IP address.
  Example: `api/v1/indicators/IPv4/8.8.8.8/general`
 
 
@@ -54,15 +54,15 @@ Indicator page api for IPv6 Addresses.
 |--------|------------|----------
 | apiKey | credentials| Your API key.
 | ip     | String     | Example -  8.8.8.8 ;
-| section| Select     | Section name (one of general, reputation, geo, malware, url_list, passive_dns).
+| section| Select     | Section name (one of general, reputation, geo, malware, urlList, passiveDns).
 
 1. general: General information about the IP, such as geo data, and a list of the other sections currently available for this IP address.
 2.  reputation: OTX data on malicious activity observed by AlienVault Labs (IP Reputation).
 3.  geo: A more verbose listing of geographic data (Country code, coordinates, etc.)
 4. malware: Malware samples analyzed by AlienVault Labs which have been observed connecting to this IP address.
-5. url_list: URLs analyzed by AlienVault Labs which point to or are somehow associated with this IP address.
-6. passive_dns: passive dns information about hostnames/domains observed by AlienVault Labs pointing to this IP address.
-7.  http_scans: Meta data for http(s) connections to the IP.
+5. urlList: URLs analyzed by AlienVault Labs which point to or are somehow associated with this IP address.
+6. passiveDns: passive dns information about hostnames/domains observed by AlienVault Labs pointing to this IP address.
+7.  httpScans: Meta data for http(s) connections to the IP.
 
 ## AlienVault.getIndicatorForDomain
 Indicator page api for domain names.Example domains: 'rghost.net', 'spywaresite.info'.
@@ -71,14 +71,14 @@ Indicator page api for domain names.Example domains: 'rghost.net', 'spywaresite.
 |--------|------------|----------
 | apiKey | credentials| Your API key.
 | domain | String     | Single domain address.Example - spywaresite.info.
-| section| Select     | Section name (one of general, reputation, geo, malware, url_list, passive_dns).
+| section| Select     | Section name (one of general, reputation, geo, malware, urlList, passiveDns).
 
 1. general: General information about the IP, such as geo data, and a list of the other sections currently available for this IP address.
 2.  reputation: OTX data on malicious activity observed by AlienVault Labs (IP Reputation).
 3.  geo: A more verbose listing of geographic data (Country code, coordinates, etc.)
 4. malware: Malware samples analyzed by AlienVault Labs which have been observed connecting to this IP address.
-5. url_list: URLs analyzed by AlienVault Labs which point to or are somehow associated with this IP address.
-6. passive_dns: passive dns information about hostnames/domains observed by AlienVault Labs pointing to this IP address.
+5. urlList: URLs analyzed by AlienVault Labs which point to or are somehow associated with this IP address.
+6. passiveDns: passive dns information about hostnames/domains observed by AlienVault Labs pointing to this IP address.
 
 ## AlienVault.getIndicatorForHostname
 Indicator page api for hostname names.Example hostnames: 'otx.alienvault.com', 'bad-guys.no-ip.org', 'alpha.beta.google.co.uk'.
@@ -87,14 +87,14 @@ Indicator page api for hostname names.Example hostnames: 'otx.alienvault.com', '
 |---------|------------|----------
 | apiKey  | credentials| Your API key.
 | hostname| String     | Single hostname address.Example - mail.vspcord.com .
-| section | Select     | Section name (one of general, reputation, geo, malware, url_list, passive_dns).
+| section | Select     | Section name (one of general, reputation, geo, malware, urlList, passiveDns).
 
 1. general: General information about the IP, such as geo data, and a list of the other sections currently available for this IP address.
 2.  reputation: OTX data on malicious activity observed by AlienVault Labs (IP Reputation).
 3.  geo: A more verbose listing of geographic data (Country code, coordinates, etc.)
 4. malware: Malware samples analyzed by AlienVault Labs which have been observed connecting to this IP address.
-5. url_list: URLs analyzed by AlienVault Labs which point to or are somehow associated with this IP address.
-6. passive_dns: passive dns information about hostnames/domains observed by AlienVault Labs pointing to this IP address.
+5. urlList: URLs analyzed by AlienVault Labs which point to or are somehow associated with this IP address.
+6. passiveDns: passive dns information about hostnames/domains observed by AlienVault Labs pointing to this IP address.
 
 ## AlienVault.getIndicatorForFileHashes
 Indicator page api for files (file hashes).
