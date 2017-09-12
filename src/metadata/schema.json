@@ -1,0 +1,1579 @@
+{
+    "package": "AlienVault",
+    "tagline": "AlienVault API",
+    "description": "AlienVault unifies all of your essential security tools in one location and combines them with real-time threat intelligence.",
+    "image": "https:\/\/logo.clearbit.com\/alienvault.com",
+    "repo": "https://github.com/RapidSoftwareSolutions/Marketplace-AlienVault-Package",
+    "keywords": [
+        "API",
+        "Unified",
+        "Security",
+        "Management",
+        "Intelligence",
+        "Real-time"
+    ],
+    "accounts": {
+        "domain": "alienvault.com",
+        "credentials": [
+            "apiKey"
+        ]
+    },
+    "steps": [
+        "Register on the https:\/\/otx.alienvault.com",
+        "After registering, you will see apiKey in console https:\/\/otx.alienvault.com\/api\/"
+    ],
+    "blocks": [{
+        "name": "getAllIndicators",
+        "description": "Export indicators for pulses in your pulse subscriptions.",
+        "args": [{
+            "name": "apiKey",
+            "type": "credentials",
+            "info": "Your API key.",
+            "required": true,
+            "vendorSchema": {
+                "name": "api_key"
+            }
+        },
+            {
+                "name": "limit",
+                "type": "Number",
+                "info": "Number of results to include per page.",
+                "required": false
+            },
+            {
+                "name": "page",
+                "type": "Number",
+                "info": "Which page of results is desired.",
+                "required": false
+            },
+            {
+                "name": "types",
+                "type": "List",
+                "info": "Comma seperated list of indicator types to limit results to.",
+                "structure": {
+                    "name": "type",
+                    "type": "String",
+                    "info": "Single type name."
+                },
+                "required": false,
+                "vendorSchema": {
+                    "format": "toString:{,}"
+                }
+            },
+            {
+                "name": "modifiedSince",
+                "type": "DatePicker",
+                "info": "Iso format datetime (UTC) string) Only include pulses modified more recently than a specific time.",
+                "required": false,
+                "vendorSchema": {
+                    "name": "modified_since"
+                }
+            }
+        ],
+        "vendorRequest": {
+            "url": "https:\/\/otx.alienvault.com:443\/api\/v1\/indicators\/export",
+            "method": "get",
+            "headers": {
+                "X-OTX-API-KEY": "{$data['api_key']}"
+            },
+            "requestParameters": [{
+                "type": "query",
+                "parameters": [
+                    "modified_since",
+                    "types",
+                    "limit",
+                    "page"
+                ]
+            }]
+        },
+        "callbacks": [{
+            "name": "error",
+            "info": "Error"
+        },
+            {
+                "name": "success",
+                "info": "Success"
+            }
+        ]
+    },
+        {
+            "name": "getIndicatorForIPv4",
+            "description": "Indicator page api for IPv4 Addresses.",
+            "args": [{
+                "name": "apiKey",
+                "type": "credentials",
+                "info": "Your API key.",
+                "required": true,
+                "vendorSchema": {
+                    "name": "api_key"
+                }
+            },
+                {
+                    "name": "ip",
+                    "type": "String",
+                    "info": "Example -  8.8.8.8 ;",
+                    "required": true
+                },
+                {
+                    "name": "section",
+                    "type": "Select",
+                    "options": [
+                        "general",
+                        "reputation",
+                        "geo",
+                        "malware",
+                        "url_list",
+                        "passive_dns",
+                        "http_scansc"
+                    ],
+                    "info": "Section name (one of general, reputation, geo, malware, url_list, passive_dns,http_scans).See more in readme.",
+                    "required": true
+                }
+            ],
+            "vendorRequest": {
+                "url": "https:\/\/otx.alienvault.com:443\/api\/v1\/indicators\/IPv4\/{$data['ip']}\/{$data['section']}",
+                "method": "get",
+                "headers": {
+                    "X-OTX-API-KEY": "{$data['api_key']}"
+                },
+                "requestParameters": [{
+                    "type": "query",
+                    "parameters": []
+                }]
+            },
+            "callbacks": [{
+                "name": "error",
+                "info": "Error"
+            },
+                {
+                    "name": "success",
+                    "info": "Success"
+                }
+            ]
+        },
+        {
+            "name": "getIndicatorForIPv6",
+            "description": "Indicator page api for IPv6 Addresses.",
+            "args": [{
+                "name": "apiKey",
+                "type": "credentials",
+                "info": "Your API key.",
+                "required": true,
+                "vendorSchema": {
+                    "name": "api_key"
+                }
+            },
+                {
+                    "name": "ip",
+                    "type": "String",
+                    "info": "Example -  8.8.8.8 ;",
+                    "required": true
+                },
+                {
+                    "name": "section",
+                    "type": "Select",
+                    "options": [
+                        "general",
+                        "reputation",
+                        "geo",
+                        "malware",
+                        "url_list",
+                        "passive_dns"
+                    ],
+                    "info": "Section name (one of general, reputation, geo, malware, url_list, passive_dns).See more in readme.",
+                    "required": true
+                }
+            ],
+            "vendorRequest": {
+                "url": "https:\/\/otx.alienvault.com:443\/api\/v1\/indicators\/IPv6\/{$data['ip']}\/{$data['section']}",
+                "method": "get",
+                "headers": {
+                    "X-OTX-API-KEY": "{$data['api_key']}"
+                },
+                "requestParameters": [{
+                    "type": "query",
+                    "parameters": []
+                }]
+            },
+            "callbacks": [{
+                "name": "error",
+                "info": "Error"
+            },
+                {
+                    "name": "success",
+                    "info": "Success"
+                }
+            ]
+        },
+        {
+            "name": "getIndicatorForDomain",
+            "description": "Indicator page api for domain names.Example domains: 'rghost.net', 'spywaresite.info'.",
+            "args": [{
+                "name": "apiKey",
+                "type": "credentials",
+                "info": "Your API key.",
+                "required": true,
+                "vendorSchema": {
+                    "name": "api_key"
+                }
+            },
+                {
+                    "name": "domain",
+                    "type": "String",
+                    "info": "Single domain address.Example - spywaresite.info.",
+                    "required": true
+                },
+                {
+                    "name": "section",
+                    "type": "Select",
+                    "options": [
+                        "general",
+                        "reputation",
+                        "geo",
+                        "malware",
+                        "url_list",
+                        "passive_dns"
+                    ],
+                    "info": "Section name (one of general, reputation, geo, malware, url_list, passive_dns).See more in readme.",
+                    "required": true
+                }
+            ],
+            "vendorRequest": {
+                "url": "https:\/\/otx.alienvault.com:443\/api\/v1\/indicators\/domain\/{$data['domain']}\/{$data['section']}",
+                "method": "get",
+                "headers": {
+                    "X-OTX-API-KEY": "{$data['api_key']}"
+                },
+                "requestParameters": [{
+                    "type": "query",
+                    "parameters": []
+                }]
+            },
+            "callbacks": [{
+                "name": "error",
+                "info": "Error"
+            },
+                {
+                    "name": "success",
+                    "info": "Success"
+                }
+            ]
+        },
+        {
+            "name": "getIndicatorForHostname",
+            "description": "Indicator page api for hostname names.Example hostnames: 'otx.alienvault.com', 'bad-guys.no-ip.org', 'alpha.beta.google.co.uk'.",
+            "args": [{
+                "name": "apiKey",
+                "type": "credentials",
+                "info": "Your API key.",
+                "required": true,
+                "vendorSchema": {
+                    "name": "api_key"
+                }
+            },
+                {
+                    "name": "hostname",
+                    "type": "String",
+                    "info": "Single hostname address.Example - mail.vspcord.com .",
+                    "required": true
+                },
+                {
+                    "name": "section",
+                    "type": "Select",
+                    "options": [
+                        "general",
+                        "geo",
+                        "malware",
+                        "url_list",
+                        "passive_dns"
+                    ],
+                    "info": "Section name (one of general, reputation, geo, malware, url_list, passive_dns).See more in readme.",
+                    "required": true
+                }
+            ],
+            "vendorRequest": {
+                "url": "https:\/\/otx.alienvault.com:443\/api\/v1\/indicators\/hostname\/{$data['hostname']}\/{$data['section']}",
+                "method": "get",
+                "headers": {
+                    "X-OTX-API-KEY": "{$data['api_key']}"
+                },
+                "requestParameters": [{
+                    "type": "query",
+                    "parameters": []
+                }]
+            },
+            "callbacks": [{
+                "name": "error",
+                "info": "Error"
+            },
+                {
+                    "name": "success",
+                    "info": "Success"
+                }
+            ]
+        },
+        {
+            "name": "getIndicatorForFileHashes",
+            "description": "Indicator page api for files (file hashes).",
+            "args": [{
+                "name": "apiKey",
+                "type": "credentials",
+                "info": "Your API key.",
+                "required": true,
+                "vendorSchema": {
+                    "name": "api_key"
+                }
+            },
+                {
+                    "name": "fileHash",
+                    "type": "String",
+                    "info": "Single file hash.Example - `6c5360d41bd2b14b1565f5b18e5c203cf512e493` .",
+                    "required": true,
+                    "vendorSchema": {
+                        "name": "file_hash"
+                    }
+                },
+                {
+                    "name": "section",
+                    "type": "Select",
+                    "options": [
+                        "general",
+                        "analysis"
+                    ],
+                    "info": "Section name.See more in readme.",
+                    "required": true
+                }
+            ],
+            "vendorRequest": {
+                "url": "https:\/\/otx.alienvault.com:443\/api\/v1\/indicators\/file\/{$data['file_hash']}\/{$data['section']}",
+                "method": "get",
+                "headers": {
+                    "X-OTX-API-KEY": "{$data['api_key']}"
+                },
+                "requestParameters": [{
+                    "type": "query",
+                    "parameters": []
+                }]
+            },
+            "callbacks": [{
+                "name": "error",
+                "info": "Error"
+            },
+                {
+                    "name": "success",
+                    "info": "Success"
+                }
+            ]
+        },
+        {
+            "name": "getIndicatorForUrl",
+            "description": "Indicator page api for URL.",
+            "args": [{
+                "name": "apiKey",
+                "type": "credentials",
+                "info": "Your API key.",
+                "required": true,
+                "vendorSchema": {
+                    "name": "api_key"
+                }
+            },
+                {
+                    "name": "url",
+                    "type": "String",
+                    "info": "Single url.Example - `http:\/\/www.fotoidea.com\/sport\/4x4_san_ponso\/slides\/IMG_0068.html` .",
+                    "required": true,
+                    "vendorSchema": {
+                        "name": "file_hash"
+                    }
+                },
+                {
+                    "name": "section",
+                    "type": "Select",
+                    "options": [
+                        "general",
+                        "url_list"
+                    ],
+                    "info": "Section name.See more in readme.",
+                    "required": true
+                }
+            ],
+            "vendorRequest": {
+                "url": "https:\/\/otx.alienvault.com:443\/api\/v1\/indicators\/url\/{$data['url']}\/{$data['section']}",
+                "method": "get",
+                "headers": {
+                    "X-OTX-API-KEY": "{$data['api_key']}"
+                },
+                "requestParameters": [{
+                    "type": "query",
+                    "parameters": []
+                }]
+            },
+            "callbacks": [{
+                "name": "error",
+                "info": "Error"
+            },
+                {
+                    "name": "success",
+                    "info": "Success"
+                }
+            ]
+        },
+        {
+            "name": "getIndicatorForCVE",
+            "description": "Indicator page api for CVEs (MITRE's Common Vulnerability Enumeration).",
+            "args": [{
+                "name": "apiKey",
+                "type": "credentials",
+                "info": "Your API key.",
+                "required": true,
+                "vendorSchema": {
+                    "name": "api_key"
+                }
+            },
+                {
+                    "name": "cve",
+                    "type": "String",
+                    "info": "Example - `CVE-2014-0160` .",
+                    "required": true,
+                    "vendorSchema": {
+                        "name": "cve"
+                    }
+                },
+                {
+                    "name": "section",
+                    "type": "Select",
+                    "options": [
+                        "general"
+                    ],
+                    "info": "Section name.General: MITRE CVE data (CPEs, CWEs, etc.), any pulses this indicator is on, list of the other sections currently available for this URL.",
+                    "required": true
+                }
+            ],
+            "vendorRequest": {
+                "url": "https:\/\/otx.alienvault.com:443\/api\/v1\/indicators\/cve\/{$data['cve']}\/{$data['section']}",
+                "method": "get",
+                "headers": {
+                    "X-OTX-API-KEY": "{$data['api_key']}"
+                },
+                "requestParameters": [{
+                    "type": "query",
+                    "parameters": []
+                }]
+            },
+            "callbacks": [{
+                "name": "error",
+                "info": "Error"
+            },
+                {
+                    "name": "success",
+                    "info": "Success"
+                }
+            ]
+        },
+        {
+            "name": "getIndicatorForNIDS",
+            "description": "Indicator page api for NIDSs.",
+            "args": [{
+                "name": "apiKey",
+                "type": "credentials",
+                "info": "Your API key.",
+                "required": true,
+                "vendorSchema": {
+                    "name": "api_key"
+                }
+            },
+                {
+                    "name": "nids",
+                    "type": "String",
+                    "info": "Example - `2820184` .",
+                    "required": true,
+                    "vendorSchema": {
+                        "name": "nids"
+                    }
+                },
+                {
+                    "name": "section",
+                    "type": "Select",
+                    "options": [
+                        "general"
+                    ],
+                    "info": "Section name.General: General metadata about NIDS.",
+                    "required": true
+                }
+            ],
+            "vendorRequest": {
+                "url": "https:\/\/otx.alienvault.com:443\/api\/v1\/indicators\/nids\/{$data['nids']}\/{$data['section']}",
+                "method": "get",
+                "headers": {
+                    "X-OTX-API-KEY": "{$data['api_key']}"
+                },
+                "requestParameters": [{
+                    "type": "query",
+                    "parameters": []
+                }]
+            },
+            "callbacks": [{
+                "name": "error",
+                "info": "Error"
+            },
+                {
+                    "name": "success",
+                    "info": "Success"
+                }
+            ]
+        },
+        {
+            "name": "getIndicatorForCorrelationRules",
+            "description": "Indicator page api for Correlation Rules.",
+            "args": [{
+                "name": "apiKey",
+                "type": "credentials",
+                "info": "Your API key.",
+                "required": true,
+                "vendorSchema": {
+                    "name": "api_key"
+                }
+            },
+                {
+                    "name": "correlationRule",
+                    "type": "String",
+                    "info": "Example - `572f8c3c540c6f0161677877` .",
+                    "required": true,
+                    "vendorSchema": {
+                        "name": "correlationrule"
+                    }
+                },
+                {
+                    "name": "section",
+                    "type": "Select",
+                    "options": [
+                        "general"
+                    ],
+                    "info": "Section name.General: General metadata about the Correlation Rule.",
+                    "required": true
+                }
+            ],
+            "vendorRequest": {
+                "url": "https:\/\/otx.alienvault.com:443\/api\/v1\/indicators\/correlation-rule\/{$data['correlationrule']}\/{$data['section']}",
+                "method": "get",
+                "headers": {
+                    "X-OTX-API-KEY": "{$data['api_key']}"
+                },
+                "requestParameters": [{
+                    "type": "query",
+                    "parameters": []
+                }]
+            },
+            "callbacks": [{
+                "name": "error",
+                "info": "Error"
+            },
+                {
+                    "name": "success",
+                    "info": "Success"
+                }
+            ]
+        },
+        {
+            "name": "getPulse",
+            "description": "Indicator page api for Correlation Rules.",
+            "args": [{
+                "name": "apiKey",
+                "type": "credentials",
+                "info": "Your API key.",
+                "required": true,
+                "vendorSchema": {
+                    "name": "api_key"
+                }
+            },
+                {
+                    "name": "pulseId",
+                    "type": "String",
+                    "info": "Example - `57204e9b3c4c3e015d93cb12`.",
+                    "required": true,
+                    "vendorSchema": {
+                        "name": "pulse_id"
+                    }
+                }
+            ],
+            "vendorRequest": {
+                "url": "https:\/\/otx.alienvault.com:443\/api\/v1\/pulses\/{$data['pulse_id']}",
+                "method": "get",
+                "headers": {
+                    "X-OTX-API-KEY": "{$data['api_key']}"
+                },
+                "requestParameters": [{
+                    "type": "query",
+                    "parameters": []
+                }]
+            },
+            "callbacks": [{
+                "name": "error",
+                "info": "Error"
+            },
+                {
+                    "name": "success",
+                    "info": "Success"
+                }
+            ]
+        },
+        {
+            "name": "getIndicatorsForPulse",
+            "description": "Returns paginated list view of the indicators inside the pulse pulseId.",
+            "args": [{
+                "name": "apiKey",
+                "type": "credentials",
+                "info": "Your API key.",
+                "required": true,
+                "vendorSchema": {
+                    "name": "api_key"
+                }
+            },
+                {
+                    "name": "pulseId",
+                    "type": "String",
+                    "info": "Example - `57204e9b3c4c3e015d93cb12`.",
+                    "required": true,
+                    "vendorSchema": {
+                        "name": "pulse_id"
+                    }
+                }
+            ],
+            "vendorRequest": {
+                "url": "https:\/\/otx.alienvault.com:443\/api\/v1\/pulses\/{$data['pulse_id']}\/indicators",
+                "method": "get",
+                "headers": {
+                    "X-OTX-API-KEY": "{$data['api_key']}"
+                },
+                "requestParameters": [{
+                    "type": "query",
+                    "parameters": []
+                }]
+            },
+            "callbacks": [{
+                "name": "error",
+                "info": "Error"
+            },
+                {
+                    "name": "success",
+                    "info": "Success"
+                }
+            ]
+        },
+        {
+            "name": "getSharePulsesAnIndicator",
+            "description": "Return all pulses that share an indicator with this pulse.",
+            "args": [{
+                "name": "apiKey",
+                "type": "credentials",
+                "info": "Your API key.",
+                "required": true,
+                "vendorSchema": {
+                    "name": "api_key"
+                }
+            },
+                {
+                    "name": "pulseId",
+                    "type": "String",
+                    "info": "Example - `57204e9b3c4c3e015d93cb12`.",
+                    "required": true,
+                    "vendorSchema": {
+                        "name": "pulse_id"
+                    }
+                }
+            ],
+            "vendorRequest": {
+                "url": "https:\/\/otx.alienvault.com:443\/api\/v1\/pulses\/{$data['pulse_id']}\/related",
+                "method": "get",
+                "headers": {
+                    "X-OTX-API-KEY": "{$data['api_key']}"
+                },
+                "requestParameters": [{
+                    "type": "query",
+                    "parameters": []
+                }]
+            },
+            "callbacks": [{
+                "name": "error",
+                "info": "Error"
+            },
+                {
+                    "name": "success",
+                    "info": "Success"
+                }
+            ]
+        },
+        {
+            "name": "getSubscriptions",
+            "description": "Threat intelligence subscriptions.All pulses by users you are subscribed to;All pulses you are directly subscribed to;All pulses you have created yourself;All pulses from groups you are a member of;",
+            "args": [{
+                "name": "apiKey",
+                "type": "credentials",
+                "info": "Your API key.",
+                "required": true,
+                "vendorSchema": {
+                    "name": "api_key"
+                }
+            }],
+            "vendorRequest": {
+                "url": "https:\/\/otx.alienvault.com:443\/api\/v1\/pulses\/subscribed",
+                "method": "get",
+                "headers": {
+                    "X-OTX-API-KEY": "{$data['api_key']}"
+                },
+                "requestParameters": [{
+                    "type": "query",
+                    "parameters": []
+                }]
+            },
+            "callbacks": [{
+                "name": "error",
+                "info": "Error"
+            },
+                {
+                    "name": "success",
+                    "info": "Success"
+                }
+            ]
+        },
+        {
+            "name": "getActivity",
+            "description": "Activity feed consists of pulses:All pulse subscriptions (directly subscribed to pulse, and all pulses by subscribed to users);All pulses created by myself;All pulses by users I am following;",
+            "args": [{
+                "name": "apiKey",
+                "type": "credentials",
+                "info": "Your API key.",
+                "required": true,
+                "vendorSchema": {
+                    "name": "api_key"
+                }
+            }],
+            "vendorRequest": {
+                "url": "https:\/\/otx.alienvault.com:443\/api\/v1\/pulses\/activity",
+                "method": "get",
+                "headers": {
+                    "X-OTX-API-KEY": "{$data['api_key']}"
+                },
+                "requestParameters": [{
+                    "type": "query",
+                    "parameters": []
+                }]
+            },
+            "callbacks": [{
+                "name": "error",
+                "info": "Error"
+            },
+                {
+                    "name": "success",
+                    "info": "Success"
+                }
+            ]
+        },
+        {
+            "name": "createPulse",
+            "description": "Allow users to submit pulses via the API.",
+            "args": [{
+                "name": "apiKey",
+                "type": "credentials",
+                "info": "Your API key.",
+                "required": true,
+                "vendorSchema": {
+                    "name": "api_key"
+                }
+            },
+                {
+                    "name": "name",
+                    "type": "String",
+                    "info": "Name for new pulse.",
+                    "required": true
+                },
+                {
+                    "name": "description",
+                    "type": "String",
+                    "info": "A brief description of the pulse, the threat it addresses.",
+                    "required": true
+                },
+                {
+                    "name": "public",
+                    "type": "Select",
+                    "options": [
+                        "true",
+                        "false"
+                    ],
+                    "info": "Public implies other users can see \/ subscribe to your pulse.",
+                    "required": true
+                },
+                {
+                    "name": "TLP",
+                    "type": "Select",
+                    "options": [
+                        "white",
+                        "red",
+                        "green",
+                        "amber"
+                    ],
+                    "info": "Amber and red pulses MUST be private.Default is green.",
+                    "required": false
+                },
+                {
+                    "name": "indicators",
+                    "type": "List",
+                    "structure": {
+                        "Name": "indicator",
+                        "type": "JSON",
+                        "info": "Example - {type: 'email', indicator: 'badguy@malware.com', description: ''};"
+                    },
+                    "info": "indicators (list of objects) List of objects (dicts): {type: 'email', indicator: 'badguy@malware.com', description: ''}. Every object in the list must contain these three fields.",
+                    "required": false
+                },
+                {
+                    "name": "tags",
+                    "type": "List",
+                    "structure": {
+                        "Name": "tag",
+                        "type": "String",
+                        "info": "Example - malware, phishing, hacking.team;"
+                    },
+                    "info": "(list of strings) Tags to describe your pulse. i.e. malware, phishing, hacking.team;",
+                    "required": false
+                },
+                {
+                    "name": "references",
+                    "type": "List",
+                    "structure": {
+                        "Name": "reference",
+                        "type": "String",
+                        "info": "Single Reference."
+                    },
+                    "info": "references (list of strings) External references to associate with this pulse.",
+                    "required": false
+                }
+            ],
+            "vendorRequest": {
+                "url": "https:\/\/otx.alienvault.com:443\/api\/v1\/pulses\/create",
+                "method": "post",
+                "headers": {
+                    "X-OTX-API-KEY": "{$data['api_key']}"
+                },
+                "requestParameters": [{
+                    "type": "json",
+                    "parameters": [
+                        "references",
+                        "tags",
+                        "indicators",
+                        "TLP",
+                        "public",
+                        "description",
+                        "name"
+                    ]
+                }]
+            },
+            "callbacks": [{
+                "name": "error",
+                "info": "Error"
+            },
+                {
+                    "name": "success",
+                    "info": "Success"
+                }
+            ]
+        },
+        {
+            "name": "getIndicatorType ",
+            "description": "Returns string representations of each indicator type (i.e. `domain`), as recognized by OTX.For use in indicator validation and create pulse.",
+            "args": [{
+                "name": "apiKey",
+                "type": "credentials",
+                "info": "Your API key.",
+                "required": true,
+                "vendorSchema": {
+                    "name": "api_key"
+                }
+            }],
+            "vendorRequest": {
+                "url": "https:\/\/otx.alienvault.com:443\/api\/v1\/pulses\/indicators\/types",
+                "method": "get",
+                "headers": {
+                    "X-OTX-API-KEY": "{$data['api_key']}"
+                },
+                "requestParameters": [{
+                    "type": "query",
+                    "parameters": []
+                }]
+            },
+            "callbacks": [{
+                "name": "error",
+                "info": "Error"
+            },
+                {
+                    "name": "success",
+                    "info": "Success"
+                }
+            ]
+        },
+        {
+            "name": "getEvents",
+            "description": "List events, such as subscribe\/unsubscribe to user\/pulse.See more in readme.",
+            "args": [{
+                "name": "apiKey",
+                "type": "credentials",
+                "info": "Your API key.",
+                "required": true,
+                "vendorSchema": {
+                    "name": "api_key"
+                }
+            },
+                {
+                    "name": "limit",
+                    "type": "Number",
+                    "info": "Number of results to include per page.",
+                    "required": false
+                },
+                {
+                    "name": "page",
+                    "type": "Number",
+                    "info": "Which page of results is desired.",
+                    "required": false
+                },
+                {
+                    "name": "modifiedSince",
+                    "type": "DatePicker",
+                    "info": "Iso format datetime (UTC) string) Only include pulses modified more recently than a specific time.",
+                    "required": false,
+                    "vendorSchema": {
+                        "name": "modified_since"
+                    }
+                }
+            ],
+            "vendorRequest": {
+                "url": "https:\/\/otx.alienvault.com:443\/api\/v1\/pulses\/events",
+                "method": "get",
+                "headers": {
+                    "X-OTX-API-KEY": "{$data['api_key']}"
+                },
+                "requestParameters": [{
+                    "type": "query",
+                    "parameters": [
+                        "modified_since",
+                        "limit",
+                        "page"
+                    ]
+                }]
+            },
+            "callbacks": [{
+                "name": "error",
+                "info": "Error"
+            },
+                {
+                    "name": "success",
+                    "info": "Success"
+                }
+            ]
+        },
+        {
+            "name": "getUserInfo",
+            "description": "Returns authenticated users or passed in user created pulse feed, default sorted by latest modified.",
+            "args": [{
+                "name": "apiKey",
+                "type": "credentials",
+                "info": "Your API key.",
+                "required": true,
+                "vendorSchema": {
+                    "name": "api_key"
+                }
+            },
+                {
+                    "name": "username",
+                    "type": "String",
+                    "info": "Single username.",
+                    "required": true
+                }
+            ],
+            "vendorRequest": {
+                "url": "https:\/\/otx.alienvault.com:443\/api\/v1\/pulses\/user\/{$data['username']}",
+                "method": "get",
+                "headers": {
+                    "X-OTX-API-KEY": "{$data['api_key']}"
+                },
+                "requestParameters": [{
+                    "type": "query",
+                    "parameters": []
+                }]
+            },
+            "callbacks": [{
+                "name": "error",
+                "info": "Error"
+            },
+                {
+                    "name": "success",
+                    "info": "Success"
+                }
+            ]
+        },
+        {
+            "name": "getUsersBySearch",
+            "description": "Search for users matcing query.",
+            "args": [{
+                "name": "apiKey",
+                "type": "credentials",
+                "info": "Your API key.",
+                "required": true,
+                "vendorSchema": {
+                    "name": "api_key"
+                }
+            },
+                {
+                    "name": "limit",
+                    "type": "Number",
+                    "info": "Number of results to include per page.",
+                    "required": false
+                },
+                {
+                    "name": "page",
+                    "type": "Number",
+                    "info": "Which page of results is desired.",
+                    "required": false
+                },
+                {
+                    "name": "sort",
+                    "type": "Select",
+                    "options": [
+                        "username",
+                        "pulse_count"
+                    ],
+                    "info": "Order by one of these fields: username, pulse_count.",
+                    "required": false
+                },
+                {
+                    "name": "searchQuery",
+                    "type": "String",
+                    "info": "Query string to search results with",
+                    "required": true,
+                    "vendorSchema": {
+                        "name": "q"
+                    }
+                }
+            ],
+            "vendorRequest": {
+                "url": "https:\/\/otx.alienvault.com:443\/api\/v1\/search\/users",
+                "method": "get",
+                "headers": {
+                    "X-OTX-API-KEY": "{$data['api_key']}"
+                },
+                "requestParameters": [{
+                    "type": "query",
+                    "parameters": [
+                        "q",
+                        "sort",
+                        "limit",
+                        "page"
+                    ]
+                }]
+            },
+            "callbacks": [{
+                "name": "error",
+                "info": "Error"
+            },
+                {
+                    "name": "success",
+                    "info": "Success"
+                }
+            ]
+        },
+        {
+            "name": "getPulsesBySearch",
+            "description": "Search for pulses matcing query.",
+            "args": [{
+                "name": "apiKey",
+                "type": "credentials",
+                "info": "Your API key.",
+                "required": true,
+                "vendorSchema": {
+                    "name": "api_key"
+                }
+            },
+                {
+                    "name": "limit",
+                    "type": "Number",
+                    "info": "Number of results to include per page.",
+                    "required": false
+                },
+                {
+                    "name": "page",
+                    "type": "Number",
+                    "info": "Which page of results is desired.",
+                    "required": false
+                },
+                {
+                    "name": "sort",
+                    "type": "Select",
+                    "options": [
+                        "modified",
+                        "created",
+                        "subscriber_count"
+                    ],
+                    "info": "Order by one of these fields: username, pulse_count.",
+                    "required": false
+                },
+                {
+                    "name": "searchQuery",
+                    "type": "String",
+                    "info": "Query string to search results with.",
+                    "required": true,
+                    "vendorSchema": {
+                        "name": "q"
+                    }
+                }
+            ],
+            "vendorRequest": {
+                "url": "https:\/\/otx.alienvault.com:443\/api\/v1\/search\/pulses",
+                "method": "get",
+                "headers": {
+                    "X-OTX-API-KEY": "{$data['api_key']}"
+                },
+                "requestParameters": [{
+                    "type": "query",
+                    "parameters": [
+                        "q",
+                        "limit",
+                        "page",
+                        "sort"
+                    ]
+                }]
+            },
+            "callbacks": [{
+                "name": "error",
+                "info": "Error"
+            },
+                {
+                    "name": "success",
+                    "info": "Success"
+                }
+            ]
+        },
+        {
+            "name": "getMe",
+            "description": "Validate your API Key configuration. If valid, some basic information about the user account corresponding to the API Key supplied will be returned.",
+            "args": [{
+                "name": "apiKey",
+                "type": "credentials",
+                "info": "Your API key.",
+                "required": true,
+                "vendorSchema": {
+                    "name": "api_key"
+                }
+            }],
+            "vendorRequest": {
+                "url": "https:\/\/otx.alienvault.com:443\/api\/v1\/users\/me",
+                "method": "get",
+                "headers": {
+                    "X-OTX-API-KEY": "{$data['api_key']}"
+                },
+                "requestParameters": [{
+                    "type": "query",
+                    "parameters": []
+                }]
+            },
+            "callbacks": [{
+                "name": "error",
+                "info": "Error"
+            },
+                {
+                    "name": "success",
+                    "info": "Success"
+                }
+            ]
+        },
+        {
+            "name": "createActionForUsers",
+            "description": "Perform actions like follow\/subscribe to other users by username.",
+            "args": [{
+                "name": "apiKey",
+                "type": "credentials",
+                "info": "Your API key.",
+                "required": true,
+                "vendorSchema": {
+                    "name": "api_key"
+                }
+            },
+                {
+                    "name": "username",
+                    "type": "String",
+                    "info": "The name to which will be perform actions.",
+                    "required": true,
+                    "vendorSchema": {
+                        "name": "username"
+                    }
+                },
+                {
+                    "name": "action",
+                    "type": "Select",
+                    "options": [
+                        "subscribe",
+                        "unsubscribe",
+                        "follow",
+                        "unfollow"
+                    ],
+                    "info": "See more in readme.",
+                    "required": true,
+                    "vendorSchema": {
+                        "name": "action"
+                    }
+                }
+            ],
+            "vendorRequest": {
+                "url": "https:\/\/otx.alienvault.com:443\/api\/v1\/users\/{$data['username']}\/{$data['action']}",
+                "method": "get",
+                "headers": {
+                    "X-OTX-API-KEY": "{$data['api_key']}"
+                },
+                "requestParameters": [{
+                    "type": "query",
+                    "parameters": []
+                }]
+            },
+            "callbacks": [{
+                "name": "error",
+                "info": "Error"
+            },
+                {
+                    "name": "success",
+                    "info": "Success"
+                }
+            ]
+        },
+        {
+            "name": "addTagsForPulse",
+            "description": "Add tags for pulse.",
+            "args": [{
+                "name": "apiKey",
+                "type": "credentials",
+                "info": "Your API key.",
+                "required": true,
+                "vendorSchema": {
+                    "name": "api_key"
+                }
+            },
+                {
+                    "name": "pulseId",
+                    "type": "String",
+                    "info": "Example - `57204e9b3c4c3e015d93cb12`.",
+                    "required": true,
+                    "vendorSchema": {
+                        "name": "pulse_id"
+                    }
+                },
+                {
+                    "name": "tags",
+                    "type": "List",
+                    "info": "List of tags.",
+                    "structure": {
+                        "Name": "tag",
+                        "type": "String",
+                        "info": "Single tag name."
+                    },
+                    "required": true
+                }
+            ],
+            "vendorRequest": {
+                "url": "https:\/\/otx.alienvault.com:443\/api\/v1\/pulses\/{$data['pulse_id']}",
+                "method": "post",
+                "headers": {
+                    "X-OTX-API-KEY": "{$data['api_key']}"
+                },
+                "requestParameters": [{
+                    "type": "json",
+                    "parameters": [
+                        "tags"
+                    ]
+                }]
+            },
+            "callbacks": [{
+                "name": "error",
+                "info": "Error"
+            },
+                {
+                    "name": "success",
+                    "info": "Success"
+                }
+            ]
+        },
+        {
+            "name": "removeTagsFromPulse",
+            "description": "Add tags for pulse.",
+            "args": [{
+                "name": "apiKey",
+                "type": "credentials",
+                "info": "Your API key.",
+                "required": true,
+                "vendorSchema": {
+                    "name": "api_key"
+                }
+            },
+                {
+                    "name": "pulseId",
+                    "type": "String",
+                    "info": "Example - `57204e9b3c4c3e015d93cb12`.",
+                    "required": true,
+                    "vendorSchema": {
+                        "name": "pulse_id"
+                    }
+                },
+                {
+                    "name": "tags",
+                    "type": "List",
+                    "info": "List of tags.",
+                    "structure": {
+                        "Name": "tag",
+                        "type": "String",
+                        "info": "Single tag name."
+                    },
+                    "required": true
+                }
+            ],
+            "vendorRequest": {
+                "url": "https:\/\/otx.alienvault.com:443\/api\/v1\/pulses\/{$data['pulse_id']}",
+                "method": "post",
+                "headers": {
+                    "X-OTX-API-KEY": "{$data['api_key']}"
+                },
+                "requestParameters": [{
+                    "type": "json",
+                    "parameters": [
+                        "tags"
+                    ]
+                }]
+            },
+            "callbacks": [{
+                "name": "error",
+                "info": "Error"
+            },
+                {
+                    "name": "success",
+                    "info": "Success"
+                }
+            ]
+        },
+        {
+            "name": "removeIndicatorsFromPulse",
+            "description": "Remove indicators from pulse.",
+            "args": [{
+                "name": "apiKey",
+                "type": "credentials",
+                "info": "Your API key.",
+                "required": true,
+                "vendorSchema": {
+                    "name": "api_key"
+                }
+            },
+                {
+                    "name": "pulseId",
+                    "type": "String",
+                    "info": "Example - `57204e9b3c4c3e015d93cb12`.",
+                    "required": true,
+                    "vendorSchema": {
+                        "name": "pulse_id"
+                    }
+                },
+                {
+                    "name": "indicatorsIds",
+                    "type": "List",
+                    "info": "List of indicators id.",
+                    "structure": {
+                        "Name": "indicatorId",
+                        "type": "String",
+                        "info": "Single indicator id."
+                    },
+                    "required": true,
+                    "vendorSchema": {
+                        "name": "indicator_id"
+                    }
+                }
+            ],
+            "vendorRequest": {
+                "url": "https:\/\/otx.alienvault.com:443\/api\/v1\/pulses\/{$data['pulse_id']}",
+                "method": "post",
+                "headers": {
+                    "X-OTX-API-KEY": "{$data['api_key']}"
+                },
+                "requestParameters": [{
+                    "type": "json",
+                    "parameters": [
+                        "indicator_id"
+                    ]
+                }]
+            },
+            "callbacks": [{
+                "name": "error",
+                "info": "Error"
+            },
+                {
+                    "name": "success",
+                    "info": "Success"
+                }
+            ]
+        },
+        {
+            "name": "updateIndicatorsForPulse",
+            "description": "Edit indicators from pulse.",
+            "args": [{
+                "name": "apiKey",
+                "type": "credentials",
+                "info": "Your API key.",
+                "required": true,
+                "vendorSchema": {
+                    "name": "api_key"
+                }
+            },
+                {
+                    "name": "pulseId",
+                    "type": "String",
+                    "info": "Example - `57204e9b3c4c3e015d93cb12`.",
+                    "required": true,
+                    "vendorSchema": {
+                        "name": "pulse_id"
+                    }
+                },
+                {
+                    "name": "editField",
+                    "type": "JSON",
+                    "info": "Example - `{'id': 1 'type': 'hostname', 'indicator': 'www.amazon.com'}`",
+                    "required": true,
+                    "vendorSchema": {
+                        "name": "edit_field"
+                    }
+                }
+            ],
+            "vendorRequest": {
+                "url": "https:\/\/otx.alienvault.com:443\/api\/v1\/pulses\/{$data['pulse_id']}",
+                "method": "post",
+                "headers": {
+                    "X-OTX-API-KEY": "{$data['api_key']}"
+                },
+                "requestParameters": [{
+                    "type": "json",
+                    "parameters": [
+                        "edit_field"
+                    ]
+                }]
+            },
+            "callbacks": [{
+                "name": "error",
+                "info": "Error"
+            },
+                {
+                    "name": "success",
+                    "info": "Success"
+                }
+            ]
+        },
+        {
+            "name": "addIndicatorsForPulse",
+            "description": "Add indicators from pulse.",
+            "args": [{
+                "name": "apiKey",
+                "type": "credentials",
+                "info": "Your API key.",
+                "required": true,
+                "vendorSchema": {
+                    "name": "api_key"
+                }
+            },
+                {
+                    "name": "pulseId",
+                    "type": "String",
+                    "info": "Example - `57204e9b3c4c3e015d93cb12`.",
+                    "required": true,
+                    "vendorSchema": {
+                        "name": "pulse_id"
+                    }
+                },
+                {
+                    "name": "addField",
+                    "type": "JSON",
+                    "info": "Example - `{'indicator': '8.8.8.9', 'type': 'IPv4', 'role': 'command_and_control'}`",
+                    "required": true,
+                    "vendorSchema": {
+                        "name": "add_field"
+                    }
+                }
+            ],
+            "vendorRequest": {
+                "url": "https:\/\/otx.alienvault.com:443\/api\/v1\/pulses\/{$data['pulse_id']}",
+                "method": "post",
+                "headers": {
+                    "X-OTX-API-KEY": "{$data['api_key']}"
+                },
+                "requestParameters": [{
+                    "type": "json",
+                    "parameters": [
+                        "add_field"
+                    ]
+                }]
+            },
+            "callbacks": [{
+                "name": "error",
+                "info": "Error"
+            },
+                {
+                    "name": "success",
+                    "info": "Success"
+                }
+            ]
+        },
+        {
+            "name": "updatePulse",
+            "description": "In an edit you can pass any pulse field(s) you wish to change. For string or numeric fields, pass the new value you wish to have. For `list` fields, pass a dictionary that can contain a `add` or `remove` field. For `add`, pass a list of new values.See more in readme.",
+            "args": [{
+                "name": "apiKey",
+                "type": "credentials",
+                "info": "Your API key.",
+                "required": true,
+                "vendorSchema": {
+                    "name": "api_key"
+                }
+            },
+                {
+                    "name": "pulseId",
+                    "type": "String",
+                    "info": "Example - `57204e9b3c4c3e015d93cb12`.",
+                    "required": true,
+                    "vendorSchema": {
+                        "name": "pulse_id"
+                    }
+                },
+                {
+                    "name": "body",
+                    "type": "JSON",
+                    "info": "Post body should be json format, containing fields you wish to edit.See more in readme.",
+                    "required": true,
+                    "vendorSchema": {
+                        "name": "body"
+                    }
+                }
+            ],
+            "vendorRequest": {
+                "url": "https:\/\/otx.alienvault.com:443\/api\/v1\/pulses\/{$data['pulse_id']}",
+                "method": "post",
+                "headers": {
+                    "X-OTX-API-KEY": "{$data['api_key']}"
+                },
+                "requestParameters": [{
+                    "type": "json",
+                    "parameters": [
+                        "body"
+                    ]
+                }]
+            },
+            "callbacks": [{
+                "name": "error",
+                "info": "Error"
+            },
+                {
+                    "name": "success",
+                    "info": "Success"
+                }
+            ]
+        }
+    ]
+}
