@@ -20,8 +20,12 @@ $app->post('/api/AlienVault/getAllIndicators', function ($request, $response) {
 
     $data = \Models\Params::createParams($requiredParams, $optionalParams, $post_data['args']);
 
-    
-    $data['types'] = \Models\Params::toString($data['types'], ','); 
+
+    if(!empty($data['types']))
+    {
+        $data['types'] = \Models\Params::toString($data['types'], ',');
+
+    }
 
     $client = $this->httpClient;
     $query_str = "https://otx.alienvault.com:443/api/v1/indicators/export";

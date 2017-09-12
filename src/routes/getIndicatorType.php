@@ -1,6 +1,6 @@
 <?php
 
-$app->post('/api/AlienVault/getIndicatorType ', function ($request, $response) {
+$app->post('/api/AlienVault/getIndicatorType', function ($request, $response) {
 
     $settings = $this->settings;
     $checkRequest = $this->validation;

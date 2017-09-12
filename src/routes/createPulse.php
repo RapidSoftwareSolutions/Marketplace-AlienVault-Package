@@ -20,7 +20,15 @@ $app->post('/api/AlienVault/createPulse', function ($request, $response) {
 
     $data = \Models\Params::createParams($requiredParams, $optionalParams, $post_data['args']);
 
-    
+    if(!empty($data['public']))
+    {
+        if($data['public'] == 'true')
+        {
+            $data['public'] = true;
+        } else {
+            $data['public'] = false;
+        }
+    }
 
     $client = $this->httpClient;
     $query_str = "https://otx.alienvault.com:443/api/v1/pulses/create";

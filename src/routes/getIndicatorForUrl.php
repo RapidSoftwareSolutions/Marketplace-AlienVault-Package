@@ -12,7 +12,7 @@ $app->post('/api/AlienVault/getIndicatorForUrl', function ($request, $response) 
         $post_data = $validateRes;
     }
 
-    $requiredParams = ['apiKey'=>'api_key','url'=>'file_hash','section'=>'section'];
+    $requiredParams = ['apiKey'=>'api_key','url'=>'url','section'=>'section'];
     $optionalParams = [];
     $bodyParams = [
        'query' => ['']

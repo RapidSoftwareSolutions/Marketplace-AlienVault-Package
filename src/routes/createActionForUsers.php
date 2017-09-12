@@ -2,6 +2,8 @@
 
 $app->post('/api/AlienVault/createActionForUsers', function ($request, $response) {
 
+    ini_set('display_errors',1);
+
     $settings = $this->settings;
     $checkRequest = $this->validation;
     $validateRes = $checkRequest->validate($request, ['apiKey','username','action']);
@@ -29,10 +31,10 @@ $app->post('/api/AlienVault/createActionForUsers', function ($request, $response
 
     $requestParams = \Models\Params::createRequestBody($data, $bodyParams);
     $requestParams['headers'] = ["X-OTX-API-KEY"=>"{$data['api_key']}"];
-     
+
 
     try {
-        $resp = $client->get($query_str, $requestParams);
+        $resp = $client->post($query_str, $requestParams);
         $responseBody = $resp->getBody()->getContents();
 
         if(in_array($resp->getStatusCode(), ['200', '201', '202', '203', '204'])) {

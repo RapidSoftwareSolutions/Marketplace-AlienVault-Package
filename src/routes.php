@@ -17,7 +17,7 @@ $routes = [
     'getSubscriptions',
     'getActivity',
     'createPulse',
-    'getIndicatorType ',
+    'getIndicatorType',
     'getEvents',
     'getUserInfo',
     'getUsersBySearch',

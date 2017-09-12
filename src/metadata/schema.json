@@ -383,7 +383,7 @@
                     "info": "Single url.Example - `http:\/\/www.fotoidea.com\/sport\/4x4_san_ponso\/slides\/IMG_0068.html` .",
                     "required": true,
                     "vendorSchema": {
-                        "name": "file_hash"
+                        "name": "url"
                     }
                 },
                 {
@@ -879,7 +879,7 @@
             ]
         },
         {
-            "name": "getIndicatorType ",
+            "name": "getIndicatorType",
             "description": "Returns string representations of each indicator type (i.e. `domain`), as recognized by OTX.For use in indicator validation and create pulse.",
             "args": [{
                 "name": "apiKey",
