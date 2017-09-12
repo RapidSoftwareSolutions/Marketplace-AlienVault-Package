@@ -1185,64 +1185,6 @@
             ]
         },
         {
-            "name": "createActionForUsers",
-            "description": "Perform actions like follow\/subscribe to other users by username.",
-            "args": [{
-                "name": "apiKey",
-                "type": "credentials",
-                "info": "Your API key.",
-                "required": true,
-                "vendorSchema": {
-                    "name": "api_key"
-                }
-            },
-                {
-                    "name": "username",
-                    "type": "String",
-                    "info": "The name to which will be perform actions.",
-                    "required": true,
-                    "vendorSchema": {
-                        "name": "username"
-                    }
-                },
-                {
-                    "name": "action",
-                    "type": "Select",
-                    "options": [
-                        "subscribe",
-                        "unsubscribe",
-                        "follow",
-                        "unfollow"
-                    ],
-                    "info": "See more in readme.",
-                    "required": true,
-                    "vendorSchema": {
-                        "name": "action"
-                    }
-                }
-            ],
-            "vendorRequest": {
-                "url": "https:\/\/otx.alienvault.com:443\/api\/v1\/users\/{$data['username']}\/{$data['action']}",
-                "method": "get",
-                "headers": {
-                    "X-OTX-API-KEY": "{$data['api_key']}"
-                },
-                "requestParameters": [{
-                    "type": "query",
-                    "parameters": []
-                }]
-            },
-            "callbacks": [{
-                "name": "error",
-                "info": "Error"
-            },
-                {
-                    "name": "success",
-                    "info": "Success"
-                }
-            ]
-        },
-        {
             "name": "addTagsForPulse",
             "description": "Add tags for pulse.",
             "args": [{

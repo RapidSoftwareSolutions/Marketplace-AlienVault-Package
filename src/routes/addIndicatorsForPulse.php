@@ -2,6 +2,7 @@
 
 $app->post('/api/AlienVault/addIndicatorsForPulse', function ($request, $response) {
 
+
     $settings = $this->settings;
     $checkRequest = $this->validation;
     $validateRes = $checkRequest->validate($request, ['apiKey','pulseId','addField']);
@@ -81,7 +82,6 @@ $app->post('/api/AlienVault/addIndicatorsForPulse', function ($request, $respons
         $result['contextWrites']['to']['status_msg'] = 'Something went wrong inside the package.';
 
     }
-
 
     return $response->withHeader('Content-type', 'application/json')->withStatus(200)->withJson($result);
 
