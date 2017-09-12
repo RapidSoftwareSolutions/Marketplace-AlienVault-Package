@@ -82,6 +82,7 @@ $app->post('/api/AlienVault/addIndicatorsForPulse', function ($request, $respons
 
     }
 
+
     return $response->withHeader('Content-type', 'application/json')->withStatus(200)->withJson($result);
 
 });
