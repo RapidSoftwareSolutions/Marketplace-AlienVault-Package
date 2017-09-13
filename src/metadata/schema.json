@@ -63,7 +63,7 @@
             {
                 "name": "modifiedSince",
                 "type": "DatePicker",
-                "info": "Iso format datetime (UTC) string) Only include pulses modified more recently than a specific time.",
+                "info": "Iso format datetime (UTC) string. Only include pulses modified more recently than a specific time.",
                 "required": false,
                 "vendorSchema": {
                     "name": "modified_since"
@@ -123,10 +123,9 @@
                         "geo",
                         "malware",
                         "url_list",
-                        "passive_dns",
-                        "http_scansc"
+                        "passive_dns"
                     ],
-                    "info": "Section name (one of general, reputation, geo, malware, url_list, passive_dns,http_scans).See more in readme.",
+                    "info": "Section name (one of general, reputation, geo, malware, url_list, passive_dns).See more in readme.",
                     "required": true
                 }
             ],
@@ -228,13 +227,12 @@
                     "type": "Select",
                     "options": [
                         "general",
-                        "reputation",
                         "geo",
                         "malware",
                         "url_list",
                         "passive_dns"
                     ],
-                    "info": "Section name (one of general, reputation, geo, malware, url_list, passive_dns).See more in readme.",
+                    "info": "Section name (one of general,geo, malware, url_list, passive_dns).See more in readme.",
                     "required": true
                 }
             ],
@@ -938,7 +936,7 @@
                 {
                     "name": "modifiedSince",
                     "type": "DatePicker",
-                    "info": "Iso format datetime (UTC) string) Only include pulses modified more recently than a specific time.",
+                    "info": "Iso format datetime (UTC) string. Only include pulses modified more recently than a specific time.",
                     "required": false,
                     "vendorSchema": {
                         "name": "modified_since"
@@ -1112,7 +1110,7 @@
                         "created",
                         "subscriber_count"
                     ],
-                    "info": "Order by one of these fields: username, pulse_count.",
+                    "info": "Order by one of these fields: modified, created, subscriber_count.",
                     "required": false
                 },
                 {

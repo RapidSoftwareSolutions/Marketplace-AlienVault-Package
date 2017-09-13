@@ -27,7 +27,7 @@ Export indicators for pulses in your pulse subscriptions.
 | limit        | Number     | Number of results to include per page.
 | page         | Number     | Which page of results is desired.
 | types        | List       | Comma seperated list of indicator types to limit results to.
-| modifiedSince| DatePicker | Iso format datetime (UTC) string) Only include pulses modified more recently than a specific time.
+| modifiedSince| DatePicker | Iso format datetime (UTC) string. Only include pulses modified more recently than a specific time.
 
 ## AlienVault.getIndicatorForIPv4
 Indicator page api for IPv4 Addresses.
@@ -62,7 +62,6 @@ Indicator page api for IPv6 Addresses.
 4. malware: Malware samples analyzed by AlienVault Labs which have been observed connecting to this IP address.
 5. urlList: URLs analyzed by AlienVault Labs which point to or are somehow associated with this IP address.
 6. passiveDns: passive dns information about hostnames/domains observed by AlienVault Labs pointing to this IP address.
-7.  httpScans: Meta data for http(s) connections to the IP.
 
 ## AlienVault.getIndicatorForDomain
 Indicator page api for domain names.Example domains: 'rghost.net', 'spywaresite.info'.
@@ -71,14 +70,13 @@ Indicator page api for domain names.Example domains: 'rghost.net', 'spywaresite.
 |--------|------------|----------
 | apiKey | credentials| Your API key.
 | domain | String     | Single domain address.Example - spywaresite.info.
-| section| Select     | Section name (one of general, reputation, geo, malware, urlList, passiveDns).
+| section| Select     | Section name (one of general, geo, malware, urlList, passiveDns).
 
 1. general: General information about the IP, such as geo data, and a list of the other sections currently available for this IP address.
-2.  reputation: OTX data on malicious activity observed by AlienVault Labs (IP Reputation).
-3.  geo: A more verbose listing of geographic data (Country code, coordinates, etc.)
-4. malware: Malware samples analyzed by AlienVault Labs which have been observed connecting to this IP address.
-5. urlList: URLs analyzed by AlienVault Labs which point to or are somehow associated with this IP address.
-6. passiveDns: passive dns information about hostnames/domains observed by AlienVault Labs pointing to this IP address.
+2.  geo: A more verbose listing of geographic data (Country code, coordinates, etc.)
+3. malware: Malware samples analyzed by AlienVault Labs which have been observed connecting to this IP address.
+4. urlList: URLs analyzed by AlienVault Labs which point to or are somehow associated with this IP address.
+5. passiveDns: passive dns information about hostnames/domains observed by AlienVault Labs pointing to this IP address.
 
 ## AlienVault.getIndicatorForHostname
 Indicator page api for hostname names.Example hostnames: 'otx.alienvault.com', 'bad-guys.no-ip.org', 'alpha.beta.google.co.uk'.
@@ -90,11 +88,10 @@ Indicator page api for hostname names.Example hostnames: 'otx.alienvault.com', '
 | section | Select     | Section name (one of general, reputation, geo, malware, urlList, passiveDns).
 
 1. general: General information about the IP, such as geo data, and a list of the other sections currently available for this IP address.
-2.  reputation: OTX data on malicious activity observed by AlienVault Labs (IP Reputation).
-3.  geo: A more verbose listing of geographic data (Country code, coordinates, etc.)
-4. malware: Malware samples analyzed by AlienVault Labs which have been observed connecting to this IP address.
-5. urlList: URLs analyzed by AlienVault Labs which point to or are somehow associated with this IP address.
-6. passiveDns: passive dns information about hostnames/domains observed by AlienVault Labs pointing to this IP address.
+2.  geo: A more verbose listing of geographic data (Country code, coordinates, etc.)
+3. malware: Malware samples analyzed by AlienVault Labs which have been observed connecting to this IP address.
+4. urlList: URLs analyzed by AlienVault Labs which point to or are somehow associated with this IP address.
+5. passiveDns: passive dns information about hostnames/domains observed by AlienVault Labs pointing to this IP address.
 
 ## AlienVault.getIndicatorForFileHashes
 Indicator page api for files (file hashes).
@@ -218,7 +215,7 @@ When a pulse you've previously subscribed to is deleted by the author, it will g
 | apiKey       | credentials| Your API key.
 | limit        | Number     | Number of results to include per page.
 | page         | Number     | Which page of results is desired.
-| modifiedSince| DatePicker | Iso format datetime (UTC) string) Only include pulses modified more recently than a specific time.
+| modifiedSince| DatePicker | Iso format datetime (UTC) string. Only include pulses modified more recently than a specific time.
 
 ## AlienVault.getUserInfo
 Returns authenticated users or passed in user created pulse feed, default sorted by latest modified.
@@ -247,7 +244,7 @@ Search for pulses matcing query.
 | apiKey     | credentials| Your API key.
 | limit      | Number     | Number of results to include per page.
 | page       | Number     | Which page of results is desired.
-| sort       | Select     | Order by one of these fields: username, pulse_count.
+| sort       | Select     | Order by one of these fields: modified, created, subscriber_count.
 | searchQuery| String     | Query string to search results with.
 
 ## AlienVault.getMe
@@ -256,21 +253,6 @@ Validate your API Key configuration. If valid, some basic information about the 
 | Field | Type       | Description
 |-------|------------|----------
 | apiKey| credentials| Your API key.
-
-## AlienVault.createActionForUsers
-Perform actions like follow/subscribe to other users by username.
-
-| Field   | Type       | Description
-|---------|------------|----------
-| apiKey  | credentials| Your API key.
-| username| String     | The name to which will be perform actions.
-| action  | Select     | Options - subscribe,unsubscribe,follow,unfollow.
-
-actions:
-1. subscribe: Include all of this users' pulses in my threat intelligence feed.
-2. unsubscribe: Remove all of this users' pulses from my threat intelligence feed.
-3. follow: Include all of this users' pulses in my activity feed, (Individual pulses must be subscribed to directly for inclusion in threat intelligence feed).
-4. unfollow: Remove all of this users' pulses from my activity feed.
 
 ## AlienVault.addTagsForPulse
 Add tags for pulse.
