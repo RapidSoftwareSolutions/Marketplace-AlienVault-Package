@@ -230,9 +230,10 @@
                         "geo",
                         "malware",
                         "url_list",
-                        "passive_dns"
+                        "passive_dns",
+                        "whois"
                     ],
-                    "info": "Section name (one of general,geo, malware, url_list, passive_dns).See more in readme.",
+                    "info": "Section name (one of general,geo, malware, url_list, passive_dns,whois).See more in readme.",
                     "required": true
                 }
             ],

@@ -70,13 +70,14 @@ Indicator page api for domain names.Example domains: 'rghost.net', 'spywaresite.
 |--------|------------|----------
 | apiKey | credentials| Your API key.
 | domain | String     | Single domain address.Example - spywaresite.info.
-| section| Select     | Section name (one of general, geo, malware, urlList, passiveDns).
+| section| Select     | Section name (one of general, geo, malware, urlList, passiveDns,whois).
 
 1. general: General information about the IP, such as geo data, and a list of the other sections currently available for this IP address.
 2.  geo: A more verbose listing of geographic data (Country code, coordinates, etc.)
 3. malware: Malware samples analyzed by AlienVault Labs which have been observed connecting to this IP address.
 4. urlList: URLs analyzed by AlienVault Labs which point to or are somehow associated with this IP address.
 5. passiveDns: passive dns information about hostnames/domains observed by AlienVault Labs pointing to this IP address.
+6. whois: Whois records for the domain.
 
 ## AlienVault.getIndicatorForHostname
 Indicator page api for hostname names.Example hostnames: 'otx.alienvault.com', 'bad-guys.no-ip.org', 'alpha.beta.google.co.uk'.
